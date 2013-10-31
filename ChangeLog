@@ -1,0 +1,4 @@
+2013-10-31  darkestkhan  <darkestkhan@gmail.com>
+
+	* make.sh: Use gprclean and gprbuild instead of clunky bash.
+
