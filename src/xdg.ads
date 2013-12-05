@@ -18,10 +18,16 @@ pragma License (GPL);
 --    You should have received a copy of the GNU General Public License     --
 --   along with this program. If not, see <http://www.gnu.org/licenses/>.   --
 ------------------------------------------------------------------------------
+
+  ----------------------------------------------------------------------------
+  -- This package implements functionality pertaining to XDG Base           --
+  -- Directories Specification.                                             --
+  -- <http://standards.freedesktop.org/basedir-spec/basedir-spec-0.7.html>  --
+  ----------------------------------------------------------------------------
+
 package XDG is
 
-  pragma Preelaborate (XDG);
-
+  ----------------------------------------------------------------------------
   -- Directory in which user specific data files should be stored.
   function Data_Home    return String;
   -- As above but for configuration files.
@@ -32,10 +38,60 @@ package XDG is
   -- Returns null string in case XDG_RUNTIME_DIR is not set.
   function Runtime_Dir  return String;
 
+  ----------------------------------------------------------------------------
   -- Preference ordered set of base directories to search for data files
   -- in addition to Data_Home. Directories are separated by ':'.
   function Data_Dirs    return String;
   -- As above but for config files.
   function Config_Dirs  return String;
+
+  ----------------------------------------------------------------------------
+  -- NOTE: Subprograms below work only within XDG base directories.
+  -- For example: Data_Home (Directory) will return path resultant of
+  -- ${XDG_DATA_HOME}/${DIRECTORY}. This functions are provided because one
+  -- can't be sure if value of XDG_DATA_HOME ends with '/' or not, resulting in
+  -- ever replicated functionality across all programs and libraries making use
+  -- of this package.
+
+  ----------------------------------------------------------------------------
+  -- These functions return path to directory.
+  function Data_Home    (Directory: in String) return String;
+  function Config_Home  (Directory: in String) return String;
+  function Cache_Home   (Directory: in String) return String;
+
+  ----------------------------------------------------------------------------
+  -- These procedures create path to directory. If target Directory already
+  -- exists nothing will happen.
+  procedure Create_Data_Home    (Directory: in String);
+  procedure Create_Config_Home  (Directory: in String);
+  procedure Create_Cache_Home   (Directory: in String);
+
+  ----------------------------------------------------------------------------
+  -- These procedures delete directory. If Empty_Only is true Directory will
+  -- be deleted only when empty, otherwise will delete Directory with its entire
+  -- content.
+  procedure Delete_Data_Home
+    ( Directory : in String;
+      Empty_Only: in Boolean := True
+    );
+  procedure Delete_Config_Home
+    ( Directory : in String;
+      Empty_Only: in Boolean := True
+    );
+  procedure Delete_Cache_Home
+    ( Directory : in String;
+      Empty_Only: in Boolean := True
+    );
+
+  ----------------------------------------------------------------------------
+  -- These functions check if directory exists and if it actually is directory.
+  -- Returns false only when target file exists and is not directory. This way
+  -- you can check if Directory is valid location and if so you can create it
+  -- using one of the procedures available from this package.
+  function Is_Valid_Data_Home    (Directory: in String) return Boolean;
+  function Is_Valid_Config_Home  (Directory: in String) return Boolean;
+  function Is_Valid_Cache_Home   (Directory: in String) return Boolean;
+
+  ----------------------------------------------------------------------------
 
 end XDG;
