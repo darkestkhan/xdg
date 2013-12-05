@@ -28,41 +28,55 @@ package body XDG is
 
   ----------------------------------------------------------------------------
 
-  function Data_Home return String
-  is
-  begin
-    if EV.Exists ("XDG_DATA_HOME") then
-      return EV.Value ("XDG_DATA_HOME");
-    else
-      return EV.Value ("HOME") & "/.local/share/";
-    end if;
-  end Data_Home;
+  generic
+    Variable: String;
+    Default : String;
+  function Get_Home return String;
 
-  function Config_Home return String
+  function Get_Home return String
   is
+    Home: constant String := EV.Value ("HOME");
   begin
-    if EV.Exists ("XDG_CONFIG_HOME") then
-      return EV.Value ("XDG_CONFIG_HOME");
+    if EV.Exists (Variable) then
+      declare
+        Value: constant String := EV.Value (Variable);
+      begin
+        if Value (Value'Last) = '/' then
+          return Value;
+        else
+          return Value & '/';
+        end if;
+      end;
     else
-      return EV.Value ("HOME") & "/.config/";
+      if Home (Home'Last) = '/' then
+        return Home & Default;
+      else
+        return Home & '/' & Default;
+      end if;
     end if;
-  end Config_Home;
+  end Get_Home;
 
-  function Cache_Home return String
-  is
-  begin
-    if EV.Exists ("XDG_CACHE_HOME") then
-      return EV.Value ("XDG_CACHE_HOME");
-    else
-      return EV.Value ("HOME") & "/.cache/";
-    end if;
-  end Cache_Home;
+  function Get_Data_Home    is new Get_Home ("XDG_DATA_HOME", ".local/share/");
+  function Get_Config_Home  is new Get_Home ("XDG_CONFIG_HOME", ".config/");
+  function Get_Cache_Home   is new Get_Home ("XDG_CACHE_HOME", ".cache/");
+
+  function Data_Home    return String renames Get_Data_Home;
+  function Config_Home  return String renames Get_Config_Home;
+  function Cache_Home   return String renames Get_Cache_Home;
 
   function Runtime_Dir return String
   is
   begin
     if EV.Exists ("XDG_RUNTIME_DIR") then
-      return EV.Value ("XDG_RUNTIME_DIR");
+      declare
+        Value: constant String := EV.Value ("XDG_RUNTIME_DIR");
+      begin
+        if Value (Value'Last) = '/' then
+          return Value;
+        else
+          return Value & '/';
+        end if;
+      end;
     else
       return "";
     end if;
@@ -99,9 +113,17 @@ package body XDG is
     Path: constant String := XDG_Path;
   begin
     if Path (Path'Last) = '/' then
-      return Path & Directory;
+      if Directory (Directory'Last) = '/' then
+        return Path & Directory;
+      else
+        return Path & Directory & '/';
+      end if;
     else
-      return Path & "/" & Directory;
+      if Directory (Directory'Last) = '/' then
+        return Path & '/' & Directory;
+      else
+        return Path & '/' & Directory & '/';
+      end if;
     end if;
   end XDG_Home;
 

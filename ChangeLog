@@ -1,5 +1,8 @@
 2013-12-05  darkestkhan  <darkestkhan@gmail.com>
 
+	* src/xdg.adb (Data_Home, Config_Home, Cache_Home):
+	Reimplement these functions.
+
 	* src/xdg.ads: Add new subprograms (Create_*, Delete_*, Is_Valid_*).
 
 2013-10-31  darkestkhan  <darkestkhan@gmail.com>

@@ -28,6 +28,10 @@ pragma License (GPL);
 package XDG is
 
   ----------------------------------------------------------------------------
+  -- NOTE: All functions returning pathname are making sure last character of
+  -- said pathname is '/'.
+
+  ----------------------------------------------------------------------------
   -- Directory in which user specific data files should be stored.
   function Data_Home    return String;
   -- As above but for configuration files.
