@@ -18,12 +18,17 @@ pragma License (GPL);
 --    You should have received a copy of the GNU General Public License     --
 --   along with this program. If not, see <http://www.gnu.org/licenses/>.   --
 ------------------------------------------------------------------------------
+
+  --------------------------------------------------------------------------
+  -- Test ability to read content of variables and their default values   --
+  -- if not set.                                                          --
+  --------------------------------------------------------------------------
+
 with Ada.Environment_Variables;
 with Ada.Command_Line;
 with Ada.Text_IO;
 
 with XDG;
-
 procedure XDG_Vars is
 
   package EV  renames Ada.Environment_Variables;
@@ -113,8 +118,8 @@ procedure XDG_Vars is
 
   Test_Data: XDG_Data (1 .. 6);
 
-  Error_Message: constant String
-    := "Total number of unexpected failures triggered: ";
+  Error_Message: constant String :=
+    "xdg_vars: Total number of unexpected failures triggered: ";
 
 begin
   -- Clear variable values as they may have been carried from environment,
