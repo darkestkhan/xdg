@@ -3,7 +3,7 @@ pragma License (GPL);
 -- EMAIL: <darkestkhan@gmail.com>                                           --
 -- License: GNU GPLv3 or any later as published by Free Software Foundation --
 -- (see README file)                                                        --
---                    Copyright © 2014 darkestkhan                          --
+--                    Copyright © 2014 - 2015 darkestkhan                   --
 ------------------------------------------------------------------------------
 --  This Program is Free Software: You can redistribute it and/or modify    --
 --  it under the terms of The GNU General Public License as published by    --
@@ -32,6 +32,11 @@ pragma License (GPL);
   -- <http://standards.freedesktop.org/basedir-spec/basedir-spec-0.7.html>  --
   ----------------------------------------------------------------------------
 
+  ---------------------------------------------------------------------------
+  -- NOTE/FIXME: Runtime_Dir creation and deletion is not supported due to
+  -- need for doing checks of permissions and for its location on local drive.
+  ---------------------------------------------------------------------------
+
 package XDG is
 
   ----------------------------------------------------------------------------
@@ -59,16 +64,18 @@ package XDG is
   ----------------------------------------------------------------------------
   -- NOTE: Subprograms below work only within XDG base directories.
   -- For example: Data_Home (Directory) will return path resultant of
-  -- ${XDG_DATA_HOME}/${DIRECTORY}. This functions are provided because one
-  -- can't be sure if value of XDG_DATA_HOME ends with '/' or not, resulting in
-  -- ever replicated functionality across all programs and libraries making use
-  -- of this package.
+  -- ${XDG_DATA_HOME}/${DIRECTORY}.
 
   ----------------------------------------------------------------------------
   -- These functions return path to directory.
+  -- NOTE: Runtime_Dir (Directory) will raise No_Runtime_Dir exception if
+  --  there is no Runtime_Dir defined.
   function Data_Home    (Directory: in String) return String;
   function Config_Home  (Directory: in String) return String;
   function Cache_Home   (Directory: in String) return String;
+  function Runtime_Dir  (Directory: in String) return String;
+
+  No_Runtime_Dir: exception;
 
   ----------------------------------------------------------------------------
   -- These procedures create path to directory. If target Directory already

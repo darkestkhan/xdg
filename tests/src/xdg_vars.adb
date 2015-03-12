@@ -3,7 +3,7 @@ pragma License (GPL);
 -- EMAIL: <darkestkhan@gmail.com>                                           --
 -- License: GNU GPLv3 or any later as published by Free Software Foundation --
 -- (see README file)                                                        --
---                    Copyright © 2013 darkestkhan                          --
+--                    Copyright © 2013, 2015 darkestkhan                    --
 ------------------------------------------------------------------------------
 --  This Program is Free Software: You can redistribute it and/or modify    --
 --  it under the terms of The GNU General Public License as published by    --
@@ -41,9 +41,9 @@ procedure XDG_Vars is
 
   type XDG_Wrapped is
   record
-    Name    : String_Access := Null;  -- Variable name
-    Value   : String_Access := Null;  -- Test value
-    Default : String_Access := Null;  -- Default value
+    Name    : String_Access := null;  -- Variable name
+    Value   : String_Access := null;  -- Test value
+    Default : String_Access := null;  -- Default value
     Variable: XDG_Variable;
   end record;
 
@@ -85,7 +85,7 @@ procedure XDG_Vars is
       TIO.Put_Line
         ( File => TIO.Standard_Error, Item => Message & " " &
           XDG_Variable'Image (This.Variable) & " : at test step : " &
-          Positive'Image (Test_Step) 
+          Positive'Image (Test_Step)
         );
     end Put_Error;
 
@@ -96,8 +96,9 @@ procedure XDG_Vars is
         Errors := Errors + 1;
       end if;
     exception
-      when others => Put_Error (This, 1);
-                     Errors := Errors + 1;
+      when others =>
+        Put_Error (This, 1);
+        Errors := Errors + 1;
     end;
 
     begin
@@ -107,8 +108,9 @@ procedure XDG_Vars is
         Errors := Errors + 1;
       end if;
     exception
-      when others => Put_Error (This, 2);
-                     Errors := Errors + 1;
+      when others =>
+        Put_Error (This, 2);
+        Errors := Errors + 1;
     end;
   end Test;
 

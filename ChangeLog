@@ -1,3 +1,16 @@
+2015-03-12  darkestkhan  <darkestkhan@gmail.com>
+
+	Added style checks, new subprogram and bumped so version.
+	* NEWS,README: Update files.
+
+	* src/xdg.ads (Runtime_Dir): New function.
+	* src/xdg.adb (Runtime_Dir): Likewise.
+
+	* tests/src/xdg_vars.adb: Fix warnings.
+
+	* xdg.gpr: Add style checks to Ada switches. Bump so version.
+	* xdg-tests.gpr: Likewise.
+
 2014-11-04  darkestkhan  <darkestkhan@gmail.com>
 
 	* README: Add information about project license.

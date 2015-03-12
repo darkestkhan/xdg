@@ -3,7 +3,7 @@ pragma License (GPL);
 -- EMAIL: <darkestkhan@gmail.com>                                           --
 -- License: GNU GPLv3 or any later as published by Free Software Foundation --
 -- (see README file)                                                        --
---                    Copyright © 2014 darkestkhan                          --
+--                    Copyright © 2014 - 2015 darkestkhan                   --
 ------------------------------------------------------------------------------
 --  This Program is Free Software: You can redistribute it and/or modify    --
 --  it under the terms of The GNU General Public License as published by    --
@@ -144,6 +144,19 @@ package body XDG is
     renames Config_Home_Path;
   function Cache_Home   (Directory: in String) return String
     renames Cache_Home_Path;
+
+  function Runtime_Dir  (Directory: in String) return String
+  is
+    Path: constant String := Runtime_Dir;
+  begin
+    if Path'Length = 0 then
+      raise No_Runtime_Dir;
+    elsif Directory (Directory'Last) = '/' then
+      return Path & Directory;
+    else
+      return Path & Directory & "/";
+    end if;
+  end Runtime_Dir;
 
   ----------------------------------------------------------------------------
 
