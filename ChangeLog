@@ -1,3 +1,13 @@
+2015-03-13  darkestkhan  <darkestkhan@gmail.com>
+
+	* TODO: Update file.
+
+	* xdg.gpr: Bump so version.
+
+	* src/xdg.ads (Create_Runtime_Dir, Delete_Runtime_Dir)
+	(Is_Valid_Runtime_Dir): New subprograms.
+	* src/xdg.adb: Likewise.
+
 2015-03-12  darkestkhan  <darkestkhan@gmail.com>
 
 	Added style checks, new subprogram and bumped so version.

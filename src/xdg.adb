@@ -172,13 +172,15 @@ package body XDG is
     AD.Create_Path (Path);
   end Create_Home;
 
-  procedure Create_Data   is new Create_Home (Data_Home);
-  procedure Create_Config is new Create_Home (Config_Home);
-  procedure Create_Cache  is new Create_Home (Cache_Home);
+  procedure Create_Data     is new Create_Home (Data_Home);
+  procedure Create_Config   is new Create_Home (Config_Home);
+  procedure Create_Cache    is new Create_Home (Cache_Home);
+  procedure Create_Runtime  is new Create_Home (Runtime_Dir);
 
   procedure Create_Data_Home    (Directory: in String) renames Create_Data;
   procedure Create_Config_Home  (Directory: in String) renames Create_Config;
   procedure Create_Cache_Home   (Directory: in String) renames Create_Cache;
+  procedure Create_Runtime_Dir  (Directory: in String) renames Create_Runtime;
 
   ----------------------------------------------------------------------------
 
@@ -198,9 +200,10 @@ package body XDG is
     end if;
   end Delete_Home;
 
-  procedure Delete_Data   is new Delete_Home (Data_Home);
-  procedure Delete_Config is new Delete_Home (Config_Home);
-  procedure Delete_Cache  is new Delete_Home (Cache_Home);
+  procedure Delete_Data     is new Delete_Home (Data_Home);
+  procedure Delete_Config   is new Delete_Home (Config_Home);
+  procedure Delete_Cache    is new Delete_Home (Cache_Home);
+  procedure Delete_Runtime  is new Delete_Home (Runtime_Dir);
 
   procedure Delete_Data_Home
     ( Directory : in String;
@@ -214,6 +217,10 @@ package body XDG is
     ( Directory : in String;
       Empty_Only: in Boolean := True
     ) renames Delete_Cache;
+  procedure Delete_Runtime_Dir
+    ( Directory : in String;
+      Empty_Only: in Boolean := True
+    ) renames Delete_Runtime;
 
   ----------------------------------------------------------------------------
 
@@ -237,6 +244,7 @@ package body XDG is
   function Check_Data_Home    is new Check_Home (Data_Home);
   function Check_Config_Home  is new Check_Home (Config_Home);
   function Check_Cache_Home   is new Check_Home (Cache_Home);
+  function Check_Runtime_Dir  is new Check_Home (Runtime_Dir);
 
   function Is_Valid_Data_Home   (Directory: in String) return Boolean
     renames Check_Data_Home;
@@ -244,6 +252,8 @@ package body XDG is
     renames Check_Config_Home;
   function Is_Valid_Cache_Home  (Directory: in String) return Boolean
     renames Check_Cache_Home;
+  function Is_Valid_Runtime_Dir (Directory: in String) return Boolean
+    renames Check_Runtime_Dir;
 
   ----------------------------------------------------------------------------
 

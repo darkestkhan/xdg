@@ -1,6 +1,6 @@
 project XDG is
 
-  Version := "0.2";
+  Version := "0.3";
 
   for Languages use ("Ada");
   for Source_Dirs use ("src");

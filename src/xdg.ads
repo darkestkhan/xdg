@@ -33,8 +33,9 @@ pragma License (GPL);
   ----------------------------------------------------------------------------
 
   ---------------------------------------------------------------------------
-  -- NOTE/FIXME: Runtime_Dir creation and deletion is not supported due to
-  -- need for doing checks of permissions and for its location on local drive.
+  -- FIXME: Create_* and Delete_* subprograms should check if Directory passed
+  --  is valid directory inside appropriate place (that is, ie. to prevent
+  --  deletion of "../../").
   ---------------------------------------------------------------------------
 
 package XDG is
@@ -65,11 +66,11 @@ package XDG is
   -- NOTE: Subprograms below work only within XDG base directories.
   -- For example: Data_Home (Directory) will return path resultant of
   -- ${XDG_DATA_HOME}/${DIRECTORY}.
+  -- NOTE: Subprogram operating on XDG_RUNTIME_DIR will raise No_Runtime_Dir
+  --  exception if there is no XDG_RUNTIME_DIR environment variable defined.
 
   ----------------------------------------------------------------------------
   -- These functions return path to directory.
-  -- NOTE: Runtime_Dir (Directory) will raise No_Runtime_Dir exception if
-  --  there is no Runtime_Dir defined.
   function Data_Home    (Directory: in String) return String;
   function Config_Home  (Directory: in String) return String;
   function Cache_Home   (Directory: in String) return String;
@@ -83,6 +84,7 @@ package XDG is
   procedure Create_Data_Home    (Directory: in String);
   procedure Create_Config_Home  (Directory: in String);
   procedure Create_Cache_Home   (Directory: in String);
+  procedure Create_Runtime_Dir  (Directory: in String);
 
   ----------------------------------------------------------------------------
   -- These procedures delete directory. If Empty_Only is true Directory will
@@ -100,6 +102,10 @@ package XDG is
     ( Directory : in String;
       Empty_Only: in Boolean := True
     );
+  procedure Delete_Runtime_Dir
+    ( Directory : in String;
+      Empty_Only: in Boolean := True
+    );
 
   ----------------------------------------------------------------------------
   -- These functions check if directory exists and if it actually is directory.
@@ -109,6 +115,7 @@ package XDG is
   function Is_Valid_Data_Home    (Directory: in String) return Boolean;
   function Is_Valid_Config_Home  (Directory: in String) return Boolean;
   function Is_Valid_Cache_Home   (Directory: in String) return Boolean;
+  function Is_Valid_Runtime_Dir  (Directory: in String) return Boolean;
 
   ----------------------------------------------------------------------------
 
