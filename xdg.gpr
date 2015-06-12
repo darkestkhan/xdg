@@ -12,7 +12,7 @@ project XDG is
   for Library_Version use "libxdg.so." & Version;
 
   package Compiler is
-    CPU   := ("-m64", "-mssse3", "-march=native", "-fPIC");
+    CPU   := external ("CPU", "-m64 -mssse3 -march=native -fPIC");
     OPT   := ("-O3", "-fomit-frame-pointer");
     WARN  := ("-Wall");
     STYLE := ("-gnaty2aAbdefhiklM80nOprSux");

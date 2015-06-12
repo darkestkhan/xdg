@@ -1,6 +1,10 @@
 A small library that should make it at least slightly easier to follow XDG
 guidelines.
 
+To build for particular CPU use environment variable CPU or put
+`-XCPU="options"` switch to gprbuild.
+CPU options default to "-m64 -mssse3 -march=native -fPIC".
+
 This library is under GMGPLv3+.
 
 ------------------------------------------------------------------------------

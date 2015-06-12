@@ -10,7 +10,7 @@ project XDG.Tests is
   for Main use ("xdg_vars.adb", "xdg_home_paths.adb");
 
   package Compiler is
-    CPU   := ("-m64", "-mssse3", "-march=native", "-fPIC");
+    CPU   := external ("CPU", "-m64 -mssse3 -march=native -fPIC");
     OPT   := ("-O3", "-fomit-frame-pointer");
     WARN  := ("-Wall");
     STYLE := ("-gnaty2aAbdefhiklM80nOprSux");
@@ -21,7 +21,7 @@ project XDG.Tests is
       );
     for Default_Switches ("Ada") use Ada_Switches & CPU & OPT & WARN & STYLE;
 
-    C_Switches := ("-O3", "-C99", "-fstack-check");
+    C_Switches := ("-O3", "-C99", "-fstack-check", "-fsanitize=undefined");
     for Default_Switches ("C") use C_Switches & CPU & OPT & WARN;
 
     Fortran_Switches := ();
