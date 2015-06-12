@@ -1,16 +1,10 @@
-A small library that should make it at least slightly easier to follow XDG
-guidelines.
-
-To build for particular CPU use environment variable CPU or put
-`-XCPU="options"` switch to gprbuild.
-CPU options default to "-m64 -mssse3 -march=native -fPIC".
-
-To build for Windows use `-XOS=Windows` switch for gprbuild.
-
-This library is under GMGPLv3+.
-
+pragma License (GPL);
 ------------------------------------------------------------------------------
---                    Copyright © 2013, 2015 darkestkhan                    --
+-- EMAIL: <darkestkhan@gmail.com>                                           --
+-- License: Modified GNU GPLv3 or any later as published by Free Software   --
+--  Foundation (GMGPL, see COPYING file).                                   --
+--                                                                          --
+--                    Copyright © 2015 darkestkhan                          --
 ------------------------------------------------------------------------------
 --  This Program is Free Software: You can redistribute it and/or modify    --
 --  it under the terms of The GNU General Public License as published by    --
@@ -32,4 +26,10 @@ This library is under GMGPLv3+.
 -- however invalidate  any other reasons why  the executable file  might be --
 -- covered by the  GNU Public License.                                      --
 ------------------------------------------------------------------------------
+private package XDG.Defaults is
 
+  Home  : constant String := ".local/share/";
+  Config: constant String := ".config/";
+  Cache : constant String := ".cache/";
+
+end XDG.Defaults;

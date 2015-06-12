@@ -3,13 +3,23 @@ project XDG is
   Version := "0.3";
 
   for Languages use ("Ada");
-  for Source_Dirs use ("src");
   for Object_Dir use "obj";
-  for Source_Files use ("xdg.ads", "xdg.adb");
   for Library_Name use "xdg";
   for Library_Dir use "lib";
   for Library_Kind use "dynamic";
   for Library_Version use "libxdg.so." & Version;
+
+  type OS_Type is ("Unix", "Windows");
+  OS: OS_Type := external ("OS", "Unix");
+
+  case OS is
+  when "Unix"    =>
+    for Source_Dirs use ("src", "src/unix");
+  when "Windows" =>
+    for Source_Dirs use ("src", "src/windows");
+  end case;
+
+  for Source_Files use ("xdg.ads", "xdg.adb", "xdg-defaults.ads");
 
   package Compiler is
     CPU   := external ("CPU", "-m64 -mssse3 -march=native -fPIC");

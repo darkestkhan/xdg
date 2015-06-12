@@ -27,6 +27,8 @@ pragma License (GPL);
 ------------------------------------------------------------------------------
 with Ada.Directories;
 with Ada.Environment_Variables;
+
+private with XDG.Defaults;
 package body XDG is
 
   ----------------------------------------------------------------------------
@@ -63,9 +65,12 @@ package body XDG is
     end if;
   end Get_Home;
 
-  function Get_Data_Home    is new Get_Home ("XDG_DATA_HOME", ".local/share/");
-  function Get_Config_Home  is new Get_Home ("XDG_CONFIG_HOME", ".config/");
-  function Get_Cache_Home   is new Get_Home ("XDG_CACHE_HOME", ".cache/");
+  function Get_Data_Home
+    is new Get_Home ("XDG_DATA_HOME", XDG.Defaults.Home);
+  function Get_Config_Home
+    is new Get_Home ("XDG_CONFIG_HOME", XDG.Defaults.Config);
+  function Get_Cache_Home
+    is new Get_Home ("XDG_CACHE_HOME", XDG.Defaults.Cache);
 
   function Data_Home    return String renames Get_Data_Home;
   function Config_Home  return String renames Get_Config_Home;
