@@ -1,3 +1,10 @@
+2015-06-30  darkestkhan  <darkestkhan@gmail.com>
+
+	* src/unix/xdg-defaults.ads, src/windows/xdg-defaults.adb,
+	* src/xdg.adb: Add preliminary support for Windows (untested).
+
+	* xdg.gpr: Add ability to change CPU options and targetted OS.
+
 2015-03-13  darkestkhan  <darkestkhan@gmail.com>
 
 	* TODO: Update file.

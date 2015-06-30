@@ -28,6 +28,9 @@ pragma License (GPL);
 ------------------------------------------------------------------------------
 private package XDG.Defaults is
 
+  -- Directory separator character.
+  Separator: constant Character := '/';
+
   Home  : constant String := ".local/share/";
   Config: constant String := ".config/";
   Cache : constant String := ".cache/";

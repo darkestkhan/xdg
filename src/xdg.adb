@@ -35,6 +35,10 @@ package body XDG is
 
   package EV renames Ada.Environment_Variables;
 
+  -- Directory separator is different for Windows and UNIX so use appropriate
+  -- one.
+  Sep: constant Character := XDG.Defaults.Separator;
+
   ----------------------------------------------------------------------------
 
   generic
@@ -50,17 +54,17 @@ package body XDG is
       declare
         Value: constant String := EV.Value (Variable);
       begin
-        if Value (Value'Last) = '/' then
+        if Value (Value'Last) = Sep then
           return Value;
         else
-          return Value & '/';
+          return Value & Sep;
         end if;
       end;
     else
-      if Home (Home'Last) = '/' then
+      if Home (Home'Last) = Sep then
         return Home & Default;
       else
-        return Home & '/' & Default;
+        return Home & Sep & Default;
       end if;
     end if;
   end Get_Home;
@@ -83,10 +87,10 @@ package body XDG is
       declare
         Value: constant String := EV.Value ("XDG_RUNTIME_DIR");
       begin
-        if Value (Value'Last) = '/' then
+        if Value (Value'Last) = Sep then
           return Value;
         else
-          return Value & '/';
+          return Value & Sep;
         end if;
       end;
     else
@@ -124,17 +128,17 @@ package body XDG is
   is
     Path: constant String := XDG_Path;
   begin
-    if Path (Path'Last) = '/' then
-      if Directory (Directory'Last) = '/' then
+    if Path (Path'Last) = Sep then
+      if Directory (Directory'Last) = Sep then
         return Path & Directory;
       else
-        return Path & Directory & '/';
+        return Path & Directory & Sep;
       end if;
     else
-      if Directory (Directory'Last) = '/' then
-        return Path & '/' & Directory;
+      if Directory (Directory'Last) = Sep then
+        return Path & Sep & Directory;
       else
-        return Path & '/' & Directory & '/';
+        return Path & Sep & Directory & Sep;
       end if;
     end if;
   end XDG_Home;
@@ -156,10 +160,10 @@ package body XDG is
   begin
     if Path'Length = 0 then
       raise No_Runtime_Dir;
-    elsif Directory (Directory'Last) = '/' then
+    elsif Directory (Directory'Last) = Sep then
       return Path & Directory;
     else
-      return Path & Directory & "/";
+      return Path & Directory & Sep;
     end if;
   end Runtime_Dir;
 

@@ -37,12 +37,16 @@ pragma License (GPL);
   --  is valid directory inside appropriate place (that is, ie. to prevent
   --  deletion of "../../").
   ---------------------------------------------------------------------------
+  -- FIXME: Suprograms related to XDG_RUNTIME_DIR, XDG_DATA_DIRS and
+  --  XDG_CONFIG_DIRS don't work correctly on Windows as I have no idea what
+  --  would be sensible default location out there.
+  ---------------------------------------------------------------------------
 
 package XDG is
 
   ----------------------------------------------------------------------------
   -- NOTE: All functions returning pathname are making sure last character of
-  -- said pathname is '/'.
+  -- said pathname is '/' (or '\' in case of Windows).
 
   ----------------------------------------------------------------------------
   -- Directory in which user specific data files should be stored.

@@ -28,8 +28,11 @@ pragma License (GPL);
 ------------------------------------------------------------------------------
 private package XDG.Defaults is
 
-  Home  : constant String := "_local/share/";
-  Config: constant String := "_config/";
-  Cache : constant String := "_cache/";
+  -- Directory separator character.
+  Separator: constant Character := '\';
+
+  Home  : constant String := "_local\share\";
+  Config: constant String := "_config\";
+  Cache : constant String := "_cache\";
 
 end XDG.Defaults;
