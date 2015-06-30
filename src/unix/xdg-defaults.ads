@@ -35,4 +35,7 @@ private package XDG.Defaults is
   Config: constant String := ".config/";
   Cache : constant String := ".cache/";
 
+  Data_Dirs   : constant String := "/usr/local/share/:/usr/share/";
+  Config_Dirs : constant String := "/etc/xdg/";
+
 end XDG.Defaults;

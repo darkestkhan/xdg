@@ -104,7 +104,7 @@ package body XDG is
     if EV.Exists ("XDG_DATA_DIRS") then
       return EV.Value ("XDG_DATA_DIRS");
     else
-      return "/usr/local/share/:/usr/share/";
+      return XDG.Defaults.Data_Dirs;
     end if;
   end Data_Dirs;
 
@@ -114,7 +114,7 @@ package body XDG is
     if EV.Exists ("XDG_CONFIG_DIRS") then
       return EV.Value ("XDG_CONFIG_DIRS");
     else
-      return "/etc/xdg/";
+      return XDG.Defaults.Config_Dirs;
     end if;
   end Config_Dirs;
 

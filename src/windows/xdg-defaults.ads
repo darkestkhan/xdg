@@ -35,4 +35,7 @@ private package XDG.Defaults is
   Config: constant String := "_config\";
   Cache : constant String := "_cache\";
 
+  Data_Dirs   : constant String := "";
+  Config_Dirs : constant String := "";
+
 end XDG.Defaults;

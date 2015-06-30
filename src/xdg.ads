@@ -37,10 +37,6 @@ pragma License (GPL);
   --  is valid directory inside appropriate place (that is, ie. to prevent
   --  deletion of "../../").
   ---------------------------------------------------------------------------
-  -- FIXME: Suprograms related to XDG_RUNTIME_DIR, XDG_DATA_DIRS and
-  --  XDG_CONFIG_DIRS don't work correctly on Windows as I have no idea what
-  --  would be sensible default location out there.
-  ---------------------------------------------------------------------------
 
 package XDG is
 
@@ -62,6 +58,7 @@ package XDG is
   ----------------------------------------------------------------------------
   -- Preference ordered set of base directories to search for data files
   -- in addition to Data_Home. Directories are separated by ':'.
+  -- NOTE: Default value for Windows is "".
   function Data_Dirs    return String;
   -- As above but for config files.
   function Config_Dirs  return String;
