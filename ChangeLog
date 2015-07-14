@@ -1,3 +1,7 @@
+2015-07-14  darkestkhan  <darkestkhan@gmail.com>
+
+	Relicense to ISC license.
+
 2015-06-30  darkestkhan  <darkestkhan@gmail.com>
 
 	* src/unix/xdg-defaults.ads, src/windows/xdg-defaults.adb,
